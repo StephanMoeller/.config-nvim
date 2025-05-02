@@ -65,3 +65,4 @@ vim.keymap.set('n', '<c-o>', '<c-i>', { desc = 'swap c-i and c-o' })
     vim.keymap.set('v', '<m-right>', ':TmuxNavigateRight<cr>')
     vim.keymap.set('v', '<m-up>', ':TmuxNavigateUp<cr>')
     vim.keymap.set('v', '<m-down>', ':TmuxNavigateDown<cr>')
+
