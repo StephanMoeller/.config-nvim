@@ -34,7 +34,7 @@ vim.keymap.set('n', 'H', 'V', { desc = 'Use h instead of v for ergo reasons' })
 
 vim.keymap.set('n', '<C-S>', ':wa<Enter>', { desc = 'save all files' })
 vim.keymap.set('v', '<C-S>', ':wa<Enter>', { desc = 'save all files' })
-vim.keymap.set('i', '<C-S>', '<Esc>:wa<Enter>a', { desc = 'save all files' })
+vim.keymap.set('i', '<C-S>', '<Esc>:wa<Enter>', { desc = 'save all files' })
 
 vim.keymap.set('n', '<C-W>', ':q!<Enter>', { desc = 'save all files' })
 vim.keymap.set('n', '<C-Q>', ':q!<Enter>', { desc = 'save all files' })
@@ -64,4 +64,6 @@ vim.keymap.set('n', '<c-o>', '<c-i>', { desc = 'swap c-i and c-o' })
     vim.keymap.set('v', '<m-right>', ':TmuxNavigateRight<cr>')
     vim.keymap.set('v', '<m-up>', ':TmuxNavigateUp<cr>')
     vim.keymap.set('v', '<m-down>', ':TmuxNavigateDown<cr>')
+    vim.keymap.set('n', ';', 'A;<ESC><HOME><DOWN>')
+    vim.keymap.set('n', ',', 'A,<ESC><HOME><DOWN>')
 
