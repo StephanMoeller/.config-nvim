@@ -23,10 +23,7 @@ return {
       vim.keymap.set("n", "<c-e>", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<c-n>", vim.lsp.buf.implementation, {})
       vim.keymap.set("n", "<m-c-e>", vim.lsp.buf.references, {})
-      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
-
-
+      vim.keymap.set({ "n", "v" }, "<leader>s", vim.lsp.buf.code_action, {})
     end
-
   },
 }
