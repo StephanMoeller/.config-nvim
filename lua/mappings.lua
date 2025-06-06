@@ -39,12 +39,6 @@ vim.keymap.set('i', '<C-S>', '<Esc>:wa<Enter>', { desc = 'save all files' })
 vim.keymap.set('n', '<C-W>', ':q!<Enter>', { desc = 'save all files' })
 vim.keymap.set('n', '<C-Q>', ':q!<Enter>', { desc = 'save all files' })
 
-vim.keymap.set('n', '<leader>i', vim.lsp.buf.hover, {}) 
-vim.keymap.set("n", "<c-n>", vim.lsp.buf.definition, {})
-vim.keymap.set("n", "<c-e>", vim.lsp.buf.implementation, {})
-vim.keymap.set("n", "<m-c-e>", vim.lsp.buf.references, {})
-vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
-
 
 vim.keymap.set('n', '<c-i>', '<c-o>', { desc = 'swap c-i and c-o' })
 vim.keymap.set('n', '<c-o>', '<c-i>', { desc = 'swap c-i and c-o' })
