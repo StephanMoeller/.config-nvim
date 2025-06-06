@@ -14,14 +14,10 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Define the plugins for lazy to install on startup
 
-
-
 -- Tell lazy to install these plugins
 require("vim-options")
 require("lazy").setup("plugins")
 require("mappings")
-
-
 
 local ns_id = vim.api.nvim_create_namespace("rel_line_number_eol")
 
