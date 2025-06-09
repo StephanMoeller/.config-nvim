@@ -1,3 +1,2 @@
--- flash should be case incensitive
--- flash should no use upper case labels
+
 
