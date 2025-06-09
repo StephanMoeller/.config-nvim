@@ -26,6 +26,7 @@ return {
       vim.keymap.set("n", "<c-e>", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<m-c-e>", vim.lsp.buf.references, {})
       vim.keymap.set({ "n", "v" }, "<c-space>", vim.lsp.buf.code_action, {})
+      vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {})
 
       vim.keymap.set("n", "<s-Up>", vim.diagnostic.goto_prev, {})
       vim.keymap.set("n", "<s-Down>", vim.diagnostic.goto_next, {})
