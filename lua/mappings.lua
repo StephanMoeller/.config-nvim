@@ -42,4 +42,4 @@ vim.keymap.set({ 'n', 'v', 'i' }, '<m-down>', '<Esc>:TmuxNavigateDown<cr>')
 
 vim.keymap.set('n', ';', 'A;<ESC><HOME><DOWN>')
 vim.keymap.set('n', ',', 'A,<ESC><HOME><DOWN>')
-vim.keymap.set('n', '<m-c-b>', ':!zig build run<enter>')
+vim.keymap.set('n', '<m-c-b>', ':echo "building..." | !zig build run<enter>')
