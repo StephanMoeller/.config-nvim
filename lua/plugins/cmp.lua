@@ -2,8 +2,9 @@ return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
-    "hrsh7th/cmp-buffer",     -- source for text in buffer
-    "hrsh7th/cmp-path",       -- source for file system paths
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-buffer", -- source for text in buffer
+    "hrsh7th/cmp-path",   -- source for file system paths
     {
       "L3MON4D3/LuaSnip",
       version = "v2.*",
@@ -11,7 +12,7 @@ return {
       build = "make install_jsregexp",
     },
     "rafamadriz/friendly-snippets",
-    "onsails/lspkind.nvim",     -- vs-code like pictograms
+    "onsails/lspkind.nvim", -- vs-code like pictograms
   },
   config = function()
     local cmp = require("cmp")
@@ -37,6 +38,7 @@ return {
         }),
       }),
       sources = cmp.config.sources({
+        { name = "zls" },
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "buffer" },

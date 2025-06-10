@@ -18,13 +18,17 @@ return {
     config = function()
       lspconfig = require("lspconfig")
       lspconfig.lua_ls.setup({})
-      lspconfig.zls.setup({})
-
-
+      lspconfig.zls.setup({
+        capabilities = require("cmp_nvim_lsp").default_capabilities()
+      })
 
       vim.keymap.set('n', '<leader>i', vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<c-e>", vim.lsp.buf.definition, {})
-      vim.keymap.set("n", "<m-c-e>", vim.lsp.buf.references, {})
+
+      -- use telescope for browsing references instead of built in functionatity
+      local telescope_config = require("telescope.builtin")
+      vim.keymap.set('n', '<m-c-e>', telescope_config.lsp_references, {}) -- requires ripgrep to be install on order to work
+      --  vim.keymap.set("n", "<m-c-e>", vim.lsp.buf.references, {})
       vim.keymap.set({ "n", "v" }, "<c-space>", vim.lsp.buf.code_action, {})
       vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {})
 
