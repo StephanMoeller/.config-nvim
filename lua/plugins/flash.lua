@@ -1,5 +1,4 @@
 return {
-
   "folke/flash.nvim",
   event = "VeryLazy",
   ---@type Flash.Config
@@ -25,8 +24,8 @@ return {
         highlight = { backdrop = false },
         char_actions = function(motion)
           return {
-            [";"] = "next",             -- set to `right` to always go right
-            [","] = "prev",             -- set to `left` to always go left
+            [";"] = "next", -- set to `right` to always go right
+            [","] = "prev", -- set to `left` to always go left
             -- clever-f style
             -- [motion:lower()] = "next",
             -- [motion:upper()] = "prev",
