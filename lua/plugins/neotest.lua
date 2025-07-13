@@ -26,7 +26,7 @@ return {
       vim.keymap.set("n", "<leader>ts", function() neotest.summary.toggle() end, opts)              -- Toggle summary
       vim.keymap.set("n", "<leader>to", function() neotest.output.open({ enter = true }) end, opts) -- Open output
       vim.keymap.set("n", "<leader>tO", function() neotest.output_panel.toggle() end, opts)         -- Toggle output panel
-      vim.keymap.set("n", "<leader>tn", function() neotest.run.run({ suite = true }) end, opts)     -- Run all
+      vim.keymap.set("n", "<leader>ta", function() neotest.run.run({ suite = true }) end, opts)     -- Run all
     end
   },
   {
