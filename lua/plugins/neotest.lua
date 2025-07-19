@@ -21,12 +21,9 @@ return {
       })
       local opts = { noremap = true, silent = true }
       -- Run nearest test
-      vim.keymap.set("n", "<leader>tt", function()
-        neotest.run.run()
-        neotest.summary.open()
-      end, opts)
+      --vim.keymap.set("n", "<leader>tt", function() neotest.run.run() neotest.summary.open() end, opts)
       -- Run file
-      vim.keymap.set("n", "<leader>tf", function()
+      vim.keymap.set("n", "<leader>tt", function()
         neotest.run.run(vim.fn.expand("%"))
         neotest.summary.open()
       end, opts)
