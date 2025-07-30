@@ -30,7 +30,7 @@ return {
             -- '.DS_Store',
             -- 'thumbs.db',
           },
-          never_show = { ".git" },
+          never_show = { ".git", ".vs", ".idea", "TestResults" },
         },
       },
     })
