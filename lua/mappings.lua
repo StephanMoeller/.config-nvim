@@ -30,10 +30,8 @@ vim.keymap.set('i', '<C-S>', '<Esc>:wa<Enter>', { desc = 'save all files' })
 
 vim.keymap.set('n', '<C-Q>', ':q!<Enter>', { desc = 'save all files' })
 
-
 vim.keymap.set('n', '<c-i>', '<c-o>', { desc = 'swap c-i and c-o' })
 vim.keymap.set('n', '<c-o>', '<c-i>', { desc = 'swap c-i and c-o' })
-
 
 vim.keymap.set({ 'n', 'v', 'i' }, '<m-left>', '<Esc>:TmuxNavigateLeft<CR>')
 vim.keymap.set({ 'n', 'v', 'i' }, '<m-right>', '<Esc>:TmuxNavigateRight<cr>')
@@ -43,4 +41,6 @@ vim.keymap.set({ 'n', 'v', 'i' }, '<m-down>', '<Esc>:TmuxNavigateDown<cr>')
 vim.keymap.set('n', ';', 'A;<ESC><HOME><DOWN>')
 vim.keymap.set('n', ',', 'A,<ESC><HOME><DOWN>')
 vim.keymap.set('n', '<m-c-b>', ':echo "building..." | !zig build run<enter>')
-vim.keymap.set('n', '<leader>t', 'itry<space><esc>')
+vim.keymap.set('n', '<leader>tt', 'itry<space><esc>')
+vim.keymap.set('n', '<leader>ss', 'iself.<esc>')
+vim.keymap.set('n', '<esc>', ':nohl<enter>')
