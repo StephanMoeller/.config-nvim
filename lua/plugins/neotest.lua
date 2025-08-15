@@ -27,20 +27,21 @@ return {
 
       -- Zig build/test og clean quickfix
       vim.keymap.set("n", "<leader>bt", function()
+        -- run zig build, only to get any compile errors. We will also run neotest.run.run(...) which will be the actual runner showing the pretty test run list
         local output = vim.fn.systemlist("zig build test 2>&1")
         local qf_lines = {}
 
-        -- filtrer kun linjer der matcher "error:" eller "warning:"
         for _, line in ipairs(output) do
-          if (line:match("error:") or line:match("warning:")) and not line:match("while executing test") and not line:match("expected") and not line:match("exit code") then
+          if (line:match("error:") or line:match("warning:")) and not line:match("failed: expected") and not line:match("while executing test") then
             table.insert(qf_lines, line)
           end
         end
 
-
+        -- show errors on file list
         vim.fn.setqflist({}, "r", { title = "Zig Build", lines = qf_lines })
         vim.cmd("copen")
 
+        -- Now also run the test runner, which output will be useless in case of compiler errors but useful if no errors.
         neotest.run.run({ suite = true })
         neotest.summary.open()
       end, { desc = "Build & test Zig med pæn quickfix-liste" })
