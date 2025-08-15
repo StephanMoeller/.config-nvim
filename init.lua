@@ -43,9 +43,9 @@ local function add_end_of_line_rel_numbers(bufnr)
 end
 
 -- Redraw when the cursor moves or buffer changes
-vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "BufEnter", "TextChanged", "TextChangedI", "InsertLeave" }, {
-  callback = function(args)
-    add_end_of_line_rel_numbers(args.buf)
-  end,
-})
-
+vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "BufEnter", "TextChanged", "TextChangedI", "InsertLeave" },
+  {
+    callback = function(args)
+      add_end_of_line_rel_numbers(args.buf)
+    end,
+  })

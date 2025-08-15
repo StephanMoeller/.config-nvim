@@ -22,6 +22,17 @@ return {
         capabilities = require("cmp_nvim_lsp").default_capabilities()
       })
 
+
+
+
+
+
+
+
+
+
+
+
       vim.keymap.set('n', '<leader>i', vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<c-e>", vim.lsp.buf.definition, {})
 

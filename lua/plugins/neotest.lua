@@ -23,6 +23,31 @@ return {
       -- Run nearest test
       --vim.keymap.set("n", "<leader>tt", function() neotest.run.run() neotest.summary.open() end, opts)
       -- Run file
+
+
+      -- Zig build/test og clean quickfix
+      vim.keymap.set("n", "<leader>bt", function()
+        local output = vim.fn.systemlist("zig build test 2>&1")
+        local qf_lines = {}
+
+        -- filtrer kun linjer der matcher "error:" eller "warning:"
+        for _, line in ipairs(output) do
+          if (line:match("error:") or line:match("warning:")) and not line:match("while executing test") and not line:match("expected") and not line:match("exit code") then
+            table.insert(qf_lines, line)
+          end
+        end
+
+
+        vim.fn.setqflist({}, "r", { title = "Zig Build", lines = qf_lines })
+        vim.cmd("copen")
+
+        neotest.run.run({ suite = true })
+        neotest.summary.open()
+      end, { desc = "Build & test Zig med pæn quickfix-liste" })
+
+
+
+
       vim.keymap.set("n", "<leader>tt", function()
         neotest.run.run(vim.fn.expand("%"))
         neotest.summary.open()
