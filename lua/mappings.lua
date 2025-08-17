@@ -1,3 +1,5 @@
+local opts = { noremap = true, silent = true }
+
 vim.wo.relativenumber = true
 vim.wo.number = true
 
@@ -48,6 +50,8 @@ vim.keymap.set('n', '<leader>so', ':so ~/.config/nvim/lua/mappings.lua<enter>')
 vim.keymap.set({ 'n', 'v', 'i' }, '<c-z>', 'zz')
 
 
+
+
 -- Navigate quick list: always show in largest window and dont make noise when ends are reached
 local function get_largest_window()
   local largest_win = vim.api.nvim_get_current_win()
@@ -83,21 +87,31 @@ local function cn_in_biggest_window()
   else
     print("")
   end
+
+  -- centralize
+  vim.cmd("normal! zz")
 end
 
 local function cp_in_biggest_window()
   -- always show the quick list when navigating it
   vim.cmd('botright copen')
+
   -- show in the largest window
   local largest_win = get_largest_window()
   vim.api.nvim_set_current_win(largest_win)
-  local ok, err = pcall(vim.cmd, "silent cprevious")
+
+
+
   -- dont show big red errors when reaching the end
+  local ok, err = pcall(vim.cmd, "silent cprevious")
   if not ok then
     print("quick list end reached")
   else
     print("")
   end
+
+  -- centralize
+  vim.cmd("normal! zz")
 end
 
 local shown = false;
@@ -111,6 +125,19 @@ local function toggle_quick_list()
   end
 end
 
-vim.keymap.set({ 'n', 'v', 'i' }, '<f9>', cn_in_biggest_window)
-vim.keymap.set({ 'n', 'v', 'i' }, '<f8>', cp_in_biggest_window)
+vim.keymap.set({ 'n', 'v', 'i' }, '<f8>', cn_in_biggest_window)
+vim.keymap.set({ 'n', 'v', 'i' }, '<f9>', cp_in_biggest_window)
 vim.keymap.set({ 'n', 'v', 'i' }, '<m-b>', toggle_quick_list)
+
+
+-- Neotest
+local neotest = require("neotest")
+vim.keymap.set("n", "<leader>ta", function()
+  neotest.run.run({ suite = true })
+  neotest.summary.open()
+  vim.cmd('botright copen')
+end, opts)
+vim.keymap.set("n", "<leader>td", function() neotest.run.run({ strategy = "dap" }) end, opts) -- Debug test
+vim.keymap.set("n", "<m-t>", function() neotest.summary.toggle() end, opts)                   -- Toggle summary
+vim.keymap.set("n", "<leader>to", function() neotest.output.open({ enter = true }) end, opts) -- Open output
+vim.keymap.set("n", "<leader>tO", function() neotest.output_panel.toggle() end, opts)         -- Toggle output panel
