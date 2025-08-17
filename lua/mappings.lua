@@ -46,5 +46,76 @@ vim.keymap.set('n', '<leader>ss', 'iself.<esc>')
 vim.keymap.set('n', '<esc>', ':nohl<enter>')
 vim.keymap.set('n', '<leader>so', ':so ~/.config/nvim/lua/mappings.lua<enter>')
 vim.keymap.set({ 'n', 'v', 'i' }, '<c-z>', 'zz')
-vim.keymap.set({ 'n', 'v', 'i' }, '<f8>', ':cn<enter>')
-vim.keymap.set({ 'n', 'v', 'i' }, '<f9>', ':cp<enter>')
+
+
+-- Function to get the largest window in the current tab
+local function get_largest_window()
+  local largest_win = vim.api.nvim_get_current_win()
+  local max_area = 0
+
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local width = vim.api.nvim_win_get_width(win)
+    local height = vim.api.nvim_win_get_height(win)
+    local area = width * height
+
+    if area > max_area then
+      largest_win = win
+      max_area = area
+    end
+  end
+
+  return largest_win
+end
+
+-- next
+local function cn_in_biggest_window()
+  local largest_win = get_largest_window()
+  vim.api.nvim_set_current_win(largest_win)
+  vim.cmd('silent cn');
+end
+local function cp_in_biggest_window()
+  local largest_win = get_largest_window()
+  vim.api.nvim_set_current_win(largest_win)
+  vim.cmd('silent cp');
+end
+
+local shown = false;
+local function toggle_quick_list()
+  if shown then
+    vim.cmd('botright cclose')
+    shown = false;
+  else
+    vim.cmd('botright copen')
+    shown = true;
+  end
+end
+
+vim.keymap.set({ 'n', 'v', 'i' }, '<f8>', cn_in_biggest_window)
+vim.keymap.set({ 'n', 'v', 'i' }, '<f9>', cp_in_biggest_window)
+vim.keymap.set({ 'n', 'v', 'i' }, '<m-b>', toggle_quick_list)
+
+-- Helper to check if a buffer is a Neo-tree buffer
+local function is_neotree(bufnr)
+  local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
+  return ft == "neo-tree"
+end
+
+-- Run code when focus enters Neo-tree
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function(args)
+    if is_neotree(args.buf) then
+      print("Entered Neo-tree!")
+      -- Place your code here
+    end
+  end,
+})
+
+-- Run code when focus leaves Neo-tree
+vim.api.nvim_create_autocmd("BufLeave", {
+  callback = function(args)
+    if is_neotree(args.buf) then
+      print("Left Neo-tree!")
+      -- Place your code here
+    end
+  end,
+})

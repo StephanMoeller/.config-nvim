@@ -46,9 +46,6 @@ return {
         neotest.summary.open()
       end, { desc = "Build & test Zig med pæn quickfix-liste" })
 
-
-
-
       vim.keymap.set("n", "<leader>tt", function()
         neotest.run.run(vim.fn.expand("%"))
         neotest.summary.open()
