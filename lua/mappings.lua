@@ -48,7 +48,7 @@ vim.keymap.set('n', '<leader>so', ':so ~/.config/nvim/lua/mappings.lua<enter>')
 vim.keymap.set({ 'n', 'v', 'i' }, '<c-z>', 'zz')
 
 
--- Function to get the largest window in the current tab
+-- Navigate quick list: always show in largest window and dont make noise when ends are reached
 local function get_largest_window()
   local largest_win = vim.api.nvim_get_current_win()
   local max_area = 0
@@ -69,14 +69,35 @@ end
 
 -- next
 local function cn_in_biggest_window()
+  -- always show the quick list when navigating it
+  vim.cmd('botright copen')
+
+  -- show in the largest window
   local largest_win = get_largest_window()
   vim.api.nvim_set_current_win(largest_win)
-  vim.cmd('silent cn');
+
+  -- dont show big red errors when reaching the end
+  local ok, err = pcall(vim.cmd, "silent cnext")
+  if not ok then
+    print("quick list end reached")
+  else
+    print("")
+  end
 end
+
 local function cp_in_biggest_window()
+  -- always show the quick list when navigating it
+  vim.cmd('botright copen')
+  -- show in the largest window
   local largest_win = get_largest_window()
   vim.api.nvim_set_current_win(largest_win)
-  vim.cmd('silent cp');
+  local ok, err = pcall(vim.cmd, "silent cprevious")
+  -- dont show big red errors when reaching the end
+  if not ok then
+    print("quick list end reached")
+  else
+    print("")
+  end
 end
 
 local shown = false;
@@ -90,32 +111,6 @@ local function toggle_quick_list()
   end
 end
 
-vim.keymap.set({ 'n', 'v', 'i' }, '<f8>', cn_in_biggest_window)
-vim.keymap.set({ 'n', 'v', 'i' }, '<f9>', cp_in_biggest_window)
+vim.keymap.set({ 'n', 'v', 'i' }, '<f9>', cn_in_biggest_window)
+vim.keymap.set({ 'n', 'v', 'i' }, '<f8>', cp_in_biggest_window)
 vim.keymap.set({ 'n', 'v', 'i' }, '<m-b>', toggle_quick_list)
-
--- Helper to check if a buffer is a Neo-tree buffer
-local function is_neotree(bufnr)
-  local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
-  return ft == "neo-tree"
-end
-
--- Run code when focus enters Neo-tree
-vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function(args)
-    if is_neotree(args.buf) then
-      print("Entered Neo-tree!")
-      -- Place your code here
-    end
-  end,
-})
-
--- Run code when focus leaves Neo-tree
-vim.api.nvim_create_autocmd("BufLeave", {
-  callback = function(args)
-    if is_neotree(args.buf) then
-      print("Left Neo-tree!")
-      -- Place your code here
-    end
-  end,
-})
