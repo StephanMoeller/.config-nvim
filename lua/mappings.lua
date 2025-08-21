@@ -32,8 +32,8 @@ vim.keymap.set('i', '<C-S>', '<Esc>:wa<Enter>', { desc = 'save all files' })
 
 vim.keymap.set('n', '<C-Q>', ':q!<Enter>', { desc = 'save all files' })
 
-vim.keymap.set('n', '<c-i>', '<c-o>', { desc = 'swap c-i and c-o' })
-vim.keymap.set('n', '<c-o>', '<c-i>', { desc = 'swap c-i and c-o' })
+vim.keymap.set('n', '<c-i>', '<c-o>zz', { desc = 'swap c-i and c-o' })
+vim.keymap.set('n', '<c-o>', '<c-i>zz', { desc = 'swap c-i and c-o' })
 
 vim.keymap.set({ 'n', 'v', 'i' }, '<m-left>', '<Esc>:TmuxNavigateLeft<CR>')
 vim.keymap.set({ 'n', 'v', 'i' }, '<m-right>', '<Esc>:TmuxNavigateRight<cr>')

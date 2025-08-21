@@ -34,7 +34,7 @@ return {
 
 
       vim.keymap.set('n', '<leader>i', vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "<c-e>", vim.lsp.buf.definition, {})
+      vim.keymap.set("n", "<c-e>", function() vim.lsp.buf.definition() end, {})
 
       -- use telescope for browsing references instead of built in functionatity
       local telescope_config = require("telescope.builtin")
