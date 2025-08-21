@@ -34,7 +34,5 @@ return {
         },
       },
     })
-    -- Configure neo-tree
-    vim.keymap.set('n', '<M-e>', ':Neotree filesystem reveal left<CR>')
   end
 }
