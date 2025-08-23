@@ -189,7 +189,26 @@ local function show_file_tree()
   vim.cmd("Neotree filesystem reveal left")
 end
 
+-- Neotree
 vim.keymap.set('n', '<M-e>', show_file_tree)
 vim.api.nvim_create_autocmd("VimEnter", {
   command = "Neotree filesystem reveal left",
 })
+
+-- oil
+-- Toggle Oil in a left vertical split (like a sidebar)
+local oil_sidebar_win = nil
+
+vim.keymap.set("n", "<leader>e", function()
+  if oil_sidebar_win and vim.api.nvim_win_is_valid(oil_sidebar_win) then
+    -- If sidebar exists, close it
+    vim.api.nvim_win_close(oil_sidebar_win, true)
+    oil_sidebar_win = nil
+  else
+    -- Otherwise, open Oil in a vsplit on the left
+    vim.cmd("topleft vsplit")
+    vim.cmd("vertical resize 30") -- set sidebar width
+    vim.cmd("Oil")
+    oil_sidebar_win = vim.api.nvim_get_current_win()
+  end
+end, { desc = "Toggle Oil sidebar" })
